@@ -23,17 +23,16 @@ class TestSuiteTest(TestCase):
         suite.add_test(TestStub('test_failure'))
         suite.add_test(TestStub('test_error'))
 
-        assert len(suite.tests) == 3
-
+        self.assert_equal(len(suite.tests), 3)
+        
     def test_suite_success_run(self):
         result = TestResult()
         suite = TestSuite()
         suite.add_test(TestStub('test_success'))
 
         suite.run(result)
-
-        assert result.summary() == '1 run, 0 failed, 0 error'
-
+        self.assert_equal(result.summary(), '1 run, 0 failed, 0 error')
+        
     def test_suite_multiple_run(self):
         result = TestResult()
         suite = TestSuite()
@@ -43,7 +42,7 @@ class TestSuiteTest(TestCase):
 
         suite.run(result)
 
-        assert result.summary() == '3 run, 1 failed, 1 error'
+        self.assert_equal(result.summary(), '3 run, 1 failed, 1 error')
         
 if __name__ == '__main__':
     result = TestResult()
@@ -57,7 +56,10 @@ if __name__ == '__main__':
     suite.add_test(TestCaseTest('test_was_run'))
     suite.add_test(TestCaseTest('test_was_tear_down'))
     suite.add_test(TestCaseTest('test_template_method'))
-
+    suite.add_test(TestCaseTest('test_assert_true'))
+    suite.add_test(TestCaseTest('test_assert_false'))
+    suite.add_test(TestCaseTest('test_assert_in'))
+    suite.add_test(TestCaseTest('test_assert_equal'))
     suite.add_test(TestSuiteTest('test_suite_size'))
     suite.add_test(TestSuiteTest('test_suite_success_run'))
     suite.add_test(TestSuiteTest('test_suite_multiple_run'))
